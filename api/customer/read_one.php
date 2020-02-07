@@ -6,12 +6,12 @@
     $db = new Database("localhost","project_mysql","webgebruiker","labo2019");
     $link=$db->get_link();
     if($link != false){
-        if(isset($_GET['email'])){
+        if(isset($_POST['email'])){
             $customer = new Customer($link);
-            $customer->__set("email",$_GET['email']);
+            $customer->__set("email",$_POST['email']);
         }
         else{
-            die(json_encode("missing argument: email"));
+            die(json_encode(array("message"=>"missing argument: email","success"=>"false")));
         }
         $json = $customer->read_one();
         if($json["firstname"] != null){
@@ -19,11 +19,11 @@
         }
         else{
             http_response_code(404);
-            echo(json_encode(array("message" => "No products found.")));
+            echo(json_encode(array("message" => "No products found.","success"=>"false")));
         }
     }
     else{
         http_response_code(404);
-        echo(json_encode(array("message" => "No connection with database.")));
+        echo(json_encode(array("message" => "No connection with database.","success"=>"false")));
     }
 ?>
