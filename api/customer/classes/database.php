@@ -7,7 +7,7 @@ class Database {
     private $password;
     private $conn;
 
-    public function __construct($host="localhost", $database="", $username="", $password="") {
+    public function __construct($database="", $username="", $password="",$host="localhost") {
         $this->host = $host;
         $this->db_name = $database;
         $this->username = $username;
